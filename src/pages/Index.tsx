@@ -20,11 +20,10 @@ const Index = () => {
     const initializeSampler = async () => {
       const newSampler = new Tone.Sampler({
         urls: {
-          C4: "piano-C4.mp3",
-          "F#4": "piano-Fs4.mp3",
-          A4: "piano-A4.mp3",
+          A1: "A1.mp3",
+          A2: "A2.mp3",
         },
-        baseUrl: "https://tonejs.github.io/audio/salamander/",
+        baseUrl: "/samples/",
         onload: () => {
           setIsLoading(false);
         },
@@ -39,7 +38,7 @@ const Index = () => {
   const playChord = async (chordName: keyof typeof chords) => {
     if (!sampler) return;
     
-    if (Tone.context.state !== "started") {
+    if (Tone.context.state === "suspended") {
       await Tone.start();
     }
     
